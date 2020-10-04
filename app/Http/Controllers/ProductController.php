@@ -40,22 +40,27 @@ class ProductController extends Controller
     }
 
     
-    // public function updateProduct(Request $request, Product $product)
-    // {
-    //     $request->validate([
-    //         'product_title' => 'required',
-    //         'product_slug' => 'required',
-    //         'product_image' => 'required',
-    //         ]);
-    //         $product->update($request->all());
+    public function updateProduct(Request $request, Product $product)
+    {
+        $request->validate([
+            'product_title' => 'required',
+            'product_slug' => 'required',
+            'product_image' => 'required',
+            ]);
+
+        $product->update([
+            'product_title' => $request->input('title'),
+            'product_slug' => $request->input('slug'),
+            'product_image' => $request->input('image'),
+            ]);
             
-    //         return redirect('product');
-    //     }
+            return redirect('product');
+        }
         
-    // public function delProduct($slug)
-    // {
-    //     $data_del = Product::where('product_slug', $slug)->delete();
+    public function delProduct($slug)
+    {
+        $data_del = Product::where('product_slug', $slug)->delete();
         
-    //     return redirect('product');
-    // }
+        return redirect('product');
+    }
 }

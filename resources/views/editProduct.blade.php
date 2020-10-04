@@ -15,23 +15,23 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="{{ 'updateProduct/'. $data_edit->product_slug }}" method="post">
                     @csrf
                     {{-- @method('PUT') --}}
                     <div class="form-group">
                         <label for="#">Product Title</label>
-                        <input type="text" name="product_title" class="form-control"
+                        <input type="text" name="title" class="form-control"
                             placeholder="Nama Product" value="{{ $data_edit->product_title}}">
                     </div>
                     <div class="form-group">
                         <label for="#">Product Slug</label>
-                        <input type="text" name="product_slug" class="form-control"
+                        <input type="text" name="slug" class="form-control"
                             placeholder="Nama Product" value="{{ $data_edit->product_slug}}">
                     </div>
                     <div class="form-group">
                         <label for="#">Image</label>
-                        <input type="file" name="product_image" class="form-control"
-                            placeholder="" value="">
+                        <input type="text" name="image" class="form-control"
+                            placeholder="" value="{{ $data_edit->product_image}}">
                     </div>
                     <button type="submit" class="btn btn-primary form-control mt-3">Save</button>
                 </form>                    

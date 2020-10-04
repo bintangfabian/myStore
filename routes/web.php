@@ -20,6 +20,6 @@ Route::get('/', function () {
 Route::get('product', "App\Http\Controllers\ProductController@showProduct");
 Route::get('detailProduct/{product_slug}', "App\Http\Controllers\ProductController@detailProduct");
 Route::get('editProduct/{product_slug}', "App\Http\Controllers\ProductController@editProduct");
-// Route::post('updateProduct/{product_slug}', "App\Http\Controllers\ProductController@updateProduct");
+Route::post('editProduct/updateProduct/{product_slug}', "App\Http\Controllers\ProductController@updateProduct");
 Route::get('delproduct/{product_slug}', "App\Http\Controllers\ProductController@delProduct");
 // Route::get('product/{slug}', "App\Http\Controllers\ProductController@detailProduct");
