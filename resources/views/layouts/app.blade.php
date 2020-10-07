@@ -27,6 +27,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="{{ url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') }}" rel="stylesheet">
 </head>
+<style>
+  svg.w-5.h-5 {
+  width: 30px;
+}
+</style>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -218,7 +223,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="product" class="nav-link">
+            <a href="{{ url('product') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Product

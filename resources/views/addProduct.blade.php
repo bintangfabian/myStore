@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row justify-content-between">
                         <div class="">
-                            <h2 class="mt-1 ml-2">Update Product</h2>
+                            <h2 class="mt-1 ml-2">Add Product</h2>
                         </div>
                         <div class="mt-1 mr-2">
                         <a href="/product" class="btn btn-info">Back</a>
@@ -15,23 +15,23 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ 'updateProduct/'. $data_edit->product_slug }}" method="post">
+                <form action="/product/addProduct" method="post">
                     @csrf
                     {{-- @method('PUT') --}}
                     <div class="form-group">
                         <label for="#">Product Title</label>
                         <input type="text" name="title" class="form-control"
-                            placeholder="Nama Product" value="{{ $data_edit->product_title}}">
+                            placeholder="Nama Product" value="">
                     </div>
                     <div class="form-group">
                         <label for="#">Product Slug</label>
-                        <input type="text" name="slug" class="form-control"
-                            placeholder="Nama Product" value="{{ $data_edit->product_slug}}">
+                        <input type="text" name="slug" class="form-control" disabled
+                            placeholder="" value="">
                     </div>
                     <div class="form-group">
                         <label for="#">Image</label>
                         <input type="text" name="image" class="form-control"
-                            placeholder="" value="{{ $data_edit->product_image}}">
+                            placeholder="" value="">
                     </div>
                     <div class="form-group">
                         <label>Price</label>
@@ -39,7 +39,7 @@
                             <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                             </div>
-                            <input type="text" class="form-control" name="price" placeholder="3000000">
+                            <input type="text" name="price" class="form-control" placeholder="3000000">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary form-control mt-3">Save</button>

@@ -14,16 +14,40 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // $data = Product::paginate(5);
+        // return view('product', compact('data'));
     }
 
     public function showProduct(Product $product)
     {
-        $data = $product->all();
+        $data = Product::paginate(5);
         
         return view('product', compact('data'));
     }
     
+    public function addProduct(Request $request)
+    {
+        return view('addProduct');
+    }
+
+    public function simpan(Request $request, Product $product)
+    {
+        // $request->validate([
+        //             'product_title' => 'required',
+        //             'product_slug' => 'required',
+        //             'product_image' => 'required',
+        //             'product_price' => 'required',
+        //             ]);
+
+        $product->product_title = $request->title;
+        $product->product_slug = \Str::slug($request->title);
+        $product->product_image = $request->image;
+        $product->product_price = $request->price;
+        $product->save();
+        
+        return redirect('product');
+    }
+
     public function editProduct($slug)
     {
         $data_edit = Product::where('product_slug', $slug)->first();
@@ -42,24 +66,26 @@ class ProductController extends Controller
     
     public function updateProduct(Request $request, Product $product)
     {
-        $request->validate([
-            'product_title' => 'required',
-            'product_slug' => 'required',
-            'product_image' => 'required',
-            ]);
+        // $request->validate([
+        //     'product_title' => 'required',
+        //     'product_slug' => 'required',
+        //     'product_image' => 'required',
+        //     'product_price' => 'required',
+        //     ]);
 
-        $product->update([
-            'product_title' => $request->input('title'),
-            'product_slug' => $request->input('slug'),
-            'product_image' => $request->input('image'),
-            ]);
+        // $product->update([
+        //     'product_title' => $request->input('title'),
+        //     'product_slug' => $request->input('slug'),
+        //     'product_image' => $request->input('image'),
+        //     'product_price' => $request->input('price'),
+        //     ]);
             
             return redirect('product');
         }
         
     public function delProduct($slug)
     {
-        $data_del = Product::where('product_slug', $slug)->delete();
+        Product::where('product_slug', $slug)->delete();
         
         return redirect('product');
     }

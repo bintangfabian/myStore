@@ -18,8 +18,14 @@ Route::get('/', function () {
 });
 
 Route::get('product', "App\Http\Controllers\ProductController@showProduct");
-Route::get('detailProduct/{product_slug}', "App\Http\Controllers\ProductController@detailProduct");
-Route::get('editProduct/{product_slug}', "App\Http\Controllers\ProductController@editProduct");
-Route::post('editProduct/updateProduct/{product_slug}', "App\Http\Controllers\ProductController@updateProduct");
-Route::get('delproduct/{product_slug}', "App\Http\Controllers\ProductController@delProduct");
+
+Route::get('product/add', "App\Http\Controllers\ProductController@addProduct");
+Route::post('product/addProduct', "App\Http\Controllers\ProductController@simpan");
+
+Route::get('product/detailProduct/{product_slug}', "App\Http\Controllers\ProductController@detailProduct");
+
+Route::get('product/editProduct/{product_slug}', "App\Http\Controllers\ProductController@editProduct");
+Route::post('product/editProduct/updateProduct/{product_slug}', "App\Http\Controllers\ProductController@update");
+
+Route::get('product/delproduct/{product_slug}', "App\Http\Controllers\ProductController@delProduct");
 // Route::get('product/{slug}', "App\Http\Controllers\ProductController@detailProduct");
