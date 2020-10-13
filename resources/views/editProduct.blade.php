@@ -19,6 +19,11 @@
                     @csrf
                     {{-- @method('PUT') --}}
                     <div class="form-group">
+                        <label for="#">ID</label>
+                        <input type="text" name="id" class="form-control" disabled
+                            placeholder="" value="{{ $data_edit->id}}">
+                    </div>
+                    <div class="form-group">
                         <label for="#">Product Title</label>
                         <input type="text" name="title" class="form-control"
                             placeholder="Nama Product" value="{{ $data_edit->product_title}}">
@@ -39,11 +44,18 @@
                             <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                             </div>
-                            <input type="text" class="form-control" name="price" placeholder="3000000">
+                            <input type="text" class="form-control" name="price" placeholder="3000000" value="{{ $data_edit->product_price}}">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary form-control mt-3">Save</button>
                 </form>                    
+            </div>
+            <div class="card-footer">
+                @if(session('info'))
+                <div class="alert alert-danger form-group">
+                {{session('info')}} 
+                </div>
+                @endif
             </div>
             </div>
         </div>

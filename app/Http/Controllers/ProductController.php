@@ -24,6 +24,14 @@ class ProductController extends Controller
         
         return view('product', compact('data'));
     }
+
+    public function detailProduct($slug)
+    {
+        $ddata = Product::where('product_slug', $slug)
+                ->firstOrFail();
+        
+        return view('DetailProduct', compact('ddata'));
+    }
     
     public function addProduct(Request $request)
     {
@@ -32,20 +40,21 @@ class ProductController extends Controller
 
     public function simpan(Request $request, Product $product)
     {
-        // $request->validate([
-        //             'product_title' => 'required',
-        //             'product_slug' => 'required',
-        //             'product_image' => 'required',
-        //             'product_price' => 'required',
-        //             ]);
 
+        // $product = new Product;
         $product->product_title = $request->title;
         $product->product_slug = \Str::slug($request->title);
         $product->product_image = $request->image;
         $product->product_price = $request->price;
-        $product->save();
+
+        if(Product::where('product_slug', $product->product_slug)->exists()){
+            return redirect('product/add')->with('info','this slug Already exists!');
+        }else{
+            $product->save();
+        }
         
-        return redirect('product');
+        return redirect('product')->with('infopr', 'Product added!');
+
     }
 
     public function editProduct($slug)
@@ -55,38 +64,36 @@ class ProductController extends Controller
         return view('editProduct', compact('data_edit'));
     }
 
-    public function detailProduct($slug)
+    public function update(Request $request, Product $product, $slug)
     {
-        $ddata = Product::where('product_slug', $slug)
-                ->firstOrFail();
-        
-        return view('DetailProduct', compact('ddata'));
-    }
-
-    
-    public function updateProduct(Request $request, Product $product)
-    {
-        // $request->validate([
-        //     'product_title' => 'required',
-        //     'product_slug' => 'required',
-        //     'product_image' => 'required',
-        //     'product_price' => 'required',
-        //     ]);
-
-        // $product->update([
-        //     'product_title' => $request->input('title'),
-        //     'product_slug' => $request->input('slug'),
-        //     'product_image' => $request->input('image'),
-        //     'product_price' => $request->input('price'),
-        //     ]);
-            
-            return redirect('product');
+        if(Product::where('product_slug', $request->slug)->first()){
+            if(Product::where('product_slug', $request->slug)->exists()){
+                return redirect('product/editProduct/'. $slug)->with('info','this slug Already exists!');
+            }else{
+                Product::where('product_slug', $slug)->update([
+                    'product_title' => $request->title,
+                    'product_slug' => $request->slug,
+                    'product_image' => $request->image,
+                    'product_price' => $request->price
+                ]);
+            }
+        }else{
+            Product::where('product_slug', $slug)->update([
+                'product_title' => $request->title,
+                'product_slug' => $request->slug,
+                'product_image' => $request->image,
+                'product_price' => $request->price
+            ]);
         }
         
+        return redirect('product')->with('infoedit', 'Product Updated!');
+    }
+
     public function delProduct($slug)
     {
-        Product::where('product_slug', $slug)->delete();
+        Product::where('product_slug', $slug)->first()->delete();
         
-        return redirect('product');
+        return redirect('product')->with('infodl', 'Product deleted!');
     }
+
 }

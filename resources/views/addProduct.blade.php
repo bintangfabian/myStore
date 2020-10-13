@@ -45,6 +45,13 @@
                     <button type="submit" class="btn btn-primary form-control mt-3">Save</button>
                 </form>                    
             </div>
+            <div class="card-footer">
+                @if(session('info'))
+                <div class="alert alert-danger form-group">
+                {{session('info')}} 
+                </div>
+                @endif
+            </div>
             </div>
         </div>
     </div>

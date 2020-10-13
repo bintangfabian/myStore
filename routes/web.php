@@ -28,4 +28,3 @@ Route::get('product/editProduct/{product_slug}', "App\Http\Controllers\ProductCo
 Route::post('product/editProduct/updateProduct/{product_slug}', "App\Http\Controllers\ProductController@update");
 
 Route::get('product/delproduct/{product_slug}', "App\Http\Controllers\ProductController@delProduct");
-// Route::get('product/{slug}', "App\Http\Controllers\ProductController@detailProduct");
